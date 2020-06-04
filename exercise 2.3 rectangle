@@ -1,0 +1,68 @@
+function pair(x, y) {
+    return m => m === 0
+                ? x
+                : m === 1
+                    ? y
+                    : error("only accept 0 or 1");
+}
+
+function head(z) {
+    return z(0);
+}
+
+function tail(z) {
+    return z(1);
+}
+
+function x_point(x) {
+    return head(x);
+}
+function y_point(x) {
+    return tail(x);
+}
+function make_point(x, y) {
+    return pair(x, y);
+}
+function make_segment(start_point, end_point) {
+    return pair(start_point,end_point);
+}
+function start_segment(x) {
+    return head(x);
+}
+function end_segment(x) {
+    return tail(x);
+}
+function rectangle(length_segment, width_segment) {
+    return pair(length_segment, width_segment);
+}
+function length_segment(z)
+{
+    return head(z);
+}
+function width_segment(z) {
+    return tail(z);
+}
+function segment_length (z) {
+    const a = start_segment(z);
+    const b = end_segment(z);
+    return math_sqrt(square(x_point(a) - x_point(b)) + square(y_point(a) - y_point(b)));
+}
+
+function square(x) {
+    return x * x;
+}
+function perimeter_rec(z) {
+    const a = length_segment(z);
+    const b = width_segment(z);
+    return (segment_length(a) + segment_length(b)) * 2;
+}
+function area_rec(z) {
+    const a = length_segment(z);
+    const b = width_segment(z);
+    return segment_length(a) * segment_length(b);
+}
+
+const l = make_segment(make_point(2, 5), make_point(9, 5));
+const w = make_segment(make_point(2, 5), make_point(2, 8));
+const rect = rectangle(l, w);
+area_rec(rect);
