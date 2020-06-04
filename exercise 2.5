@@ -1,0 +1,35 @@
+function pair(x, y) {
+    return fast_expt(2, x) * fast_expt(3, y);
+}
+// represent a pair as the product (2^x)*(3^y)
+function fast_expt(b, n) {
+    return n === 0
+            ? 1
+            : is_even(n)
+                ? square(fast_expt(b, n / 2))
+                : b * fast_expt(b, n - 1);
+}
+
+function is_even(x) {
+    return x % 2 === 0;
+}
+
+function square(x) {
+    return x * x;
+}
+
+function head(z) {
+    return is_even(z)
+            ? head(z / 2) + 1
+            : 0;
+}
+
+function tail(z) {
+    return z % 3 === 0
+            ? tail(z / 3) + 1
+            : 0;
+}
+
+const p = pair(1, 3);
+head(p);
+tail(p);
